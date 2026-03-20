@@ -226,6 +226,7 @@ function TabDropdown({
     top:  anchorRect.bottom + 6,
     left: anchorRect.left,
     zIndex: 9999,
+    boxShadow: 'var(--shadow-dropdown)',
   }
 
   const itemBase = 'flex items-center gap-2 w-full px-3 py-1.5 text-xs text-left rounded-md transition-colors'
@@ -235,7 +236,6 @@ function TabDropdown({
       ref={ref}
       style={style}
       className="min-w-[140px] rounded-lg border border-border bg-surface p-1 animate-slide-up"
-      style={{ boxShadow: 'var(--shadow-dropdown)' }}
     >
       <button
         onClick={() => { onRename(); onClose() }}
