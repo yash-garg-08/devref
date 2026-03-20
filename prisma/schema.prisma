@@ -1,0 +1,39 @@
+// Prisma schema for DevRef
+// Switch provider to "postgresql" for production
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tab {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  color     String?                        // hex colour for the tab pill
+  order     Int      @default(0)
+  isBuiltIn Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cards Card[]
+}
+
+model Card {
+  id        String   @id @default(cuid())
+  title     String
+  code      String
+  type      String   @default("code")  // "code" | "ip-table"
+  tag       String?
+  tagColor  String?  @default("blue")  // blue | green | red | orange | purple
+  order     Int      @default(0)
+  tabId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tab Tab @relation(fields: [tabId], references: [id], onDelete: Cascade)
+}
