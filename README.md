@@ -9,13 +9,14 @@ Built with **Next.js 14 App Router**, **TypeScript**, **Tailwind CSS**, and **Pr
 ## Features
 
 - **Tabbed categories** — group commands by project or tool, with custom colour coding per tab
+- **Tab-coloured cards** — each card's header renders a gradient tinted with its parent tab's colour; card titles are tinted to match, making it instantly clear which tab a card belongs to even in the "All" view
 - **Multiple card types** — Command Cards for code/text, IP Reference cards for server tables; extensible registry for future types
 - **Inline editing** — edit any command block in-place; click ✎ on a card title to rename it
 - **Full-text search** — instantly filters across all cards, titles, commands, and tags
 - **Tab management** — add, rename, colour, and delete tabs via a `···` dropdown
 - **Card management** — add, rename, move between tabs, and delete cards with confirmation
 - **Persistent** — all changes saved to SQLite (dev) or PostgreSQL (prod) via REST API
-- **Dark theme** — designed for daily terminal use
+- **Dark theme** — designed for daily terminal use; gradient header for visual hierarchy
 
 ---
 

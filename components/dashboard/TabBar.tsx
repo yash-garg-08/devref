@@ -307,6 +307,7 @@ function EditableTabItem({
 
   function openDropdown(e: React.MouseEvent) {
     e.stopPropagation()
+    if (dropdownOpen) { setDropdownOpen(false); return }
     if (menuBtnRef.current) setDropdownAnchor(menuBtnRef.current.getBoundingClientRect())
     setDropdownOpen(true)
   }

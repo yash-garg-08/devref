@@ -90,12 +90,12 @@ export default function CodeBlock({ code, onSave }: CodeBlockProps) {
             e.target.style.height = 'auto'
             e.target.style.height = e.target.scrollHeight + 'px'
           }}
-          className="w-full bg-transparent font-mono text-xs text-text leading-relaxed p-3 pt-9 outline-none resize-none min-h-[80px]"
+          className="w-full bg-transparent font-mono text-text leading-relaxed p-3 pt-9 outline-none resize-none min-h-[80px]" style={{ fontSize: '14px' }}
           autoFocus
         />
       ) : (
         <pre className="p-3 pt-9 overflow-x-auto">
-          <code className="font-mono text-xs leading-relaxed whitespace-pre" style={{ color: 'rgb(var(--color-codetext))' }}>
+          <code className="font-mono leading-relaxed whitespace-pre" style={{ color: 'rgb(var(--color-codetext))', fontSize: '14px' }}>
             {code}
           </code>
         </pre>

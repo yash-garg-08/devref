@@ -7,6 +7,7 @@ import CodeBlock from './CodeBlock'
 
 interface CommandCardProps {
   card: Card
+  tabColor?: string | null
   onUpdateCode: (cardId: string, newCode: string) => Promise<void>
   onRenameCard: (cardId: string, newTitle: string) => Promise<void>
   onMoveCard: (card: Card) => void
@@ -15,6 +16,7 @@ interface CommandCardProps {
 
 export default function CommandCard({
   card,
+  tabColor,
   onUpdateCode,
   onRenameCard,
   onMoveCard,
@@ -47,7 +49,7 @@ export default function CommandCard({
   return (
     <div className="group/card rounded-xl bg-surface border border-border overflow-hidden hover:border-accent hover:shadow-[0_4px_20px_rgba(79,142,247,0.12)] transition-all duration-200" style={{ boxShadow: 'var(--shadow-card)' }}>
       {/* Card header */}
-      <div className="relative flex items-center justify-between px-4 py-2.5 bg-surface2 border-b border-border">
+      <div className="relative flex items-center justify-between px-4 py-3 border-b border-border" style={{ background: tabColor ? `linear-gradient(135deg, ${tabColor}55 0%, ${tabColor}22 60%, transparent 100%)` : 'rgb(var(--color-surface2))' }}>
 
         {/* Title — click pencil button to rename */}
         {renaming ? (
@@ -76,7 +78,7 @@ export default function CommandCard({
           </div>
         ) : (
           <div className="flex items-center gap-1">
-            <span className="text-xxs font-bold uppercase tracking-widest text-muted">
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: tabColor ?? 'rgb(var(--color-text))' }}>
               {card.title}
             </span>
             <button

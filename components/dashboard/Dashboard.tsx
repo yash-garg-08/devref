@@ -215,6 +215,11 @@ export default function Dashboard({ initialTabs }: DashboardProps) {
 
   // ── Render ────────────────────────────────────────────────────────────────
   const currentTab = tabs.find((t) => t.slug === activeTab)
+  const tabColorMap = useMemo(() => {
+    const map: Record<string, string | null> = {}
+    tabs.forEach((t) => { map[t.id] = t.color ?? null })
+    return map
+  }, [tabs])
 
   // Options for the "move card" select — all tabs except the card's current tab
   const moveDestOptions = tabs
@@ -224,7 +229,7 @@ export default function Dashboard({ initialTabs }: DashboardProps) {
   return (
     <>
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-bg/95 backdrop-blur-sm border-b border-border px-8 py-4 flex items-center justify-between shadow-[0_1px_0_rgba(255,255,255,0.04)]">
+      <header className="sticky top-0 z-40 backdrop-blur-sm border-b border-border px-8 py-4 flex items-center justify-between shadow-[0_1px_0_rgba(255,255,255,0.04)]" style={{ background: 'linear-gradient(135deg, #0d0f14 0%, #1a1f35 40%, #0f1a2e 70%, #0d0f14 100%)' }}>
         <h1 className="text-xl font-black tracking-tight">
           Dev<span className="text-accent">Ref</span>
           <span className="text-muted font-normal text-sm ml-2.5">— Yash</span>
@@ -273,6 +278,7 @@ export default function Dashboard({ initialTabs }: DashboardProps) {
                 <IpReferenceCard
                   key={card.id}
                   card={card}
+                  tabColor={tabColorMap[card.tabId] ?? null}
                   onUpdateCode={handleUpdateCode}
                   onRenameCard={handleRenameCard}
                   onDeleteCard={(c) => setDeleteCardTarget(c)}
@@ -282,6 +288,7 @@ export default function Dashboard({ initialTabs }: DashboardProps) {
                 <CommandCard
                   key={card.id}
                   card={card}
+                  tabColor={tabColorMap[card.tabId] ?? null}
                   onUpdateCode={handleUpdateCode}
                   onRenameCard={handleRenameCard}
                   onDeleteCard={(c) => setDeleteCardTarget(c)}
