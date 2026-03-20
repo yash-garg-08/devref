@@ -199,6 +199,7 @@ function ColorPickerPortal({
 function TabDropdown({
   anchorRect,
   currentColor,
+  triggerRef,
   onRename,
   onColor,
   onDelete,
@@ -206,6 +207,7 @@ function TabDropdown({
 }: {
   anchorRect: DOMRect
   currentColor: string | null
+  triggerRef: React.RefObject<HTMLButtonElement>
   onRename: () => void
   onColor: () => void
   onDelete: () => void
@@ -215,11 +217,13 @@ function TabDropdown({
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
+      // Ignore clicks on the trigger button — openDropdown handles the toggle
+      if (triggerRef.current && triggerRef.current.contains(e.target as Node)) return
       if (ref.current && !ref.current.contains(e.target as Node)) onClose()
     }
     const t = setTimeout(() => document.addEventListener('mousedown', handler), 50)
     return () => { clearTimeout(t); document.removeEventListener('mousedown', handler) }
-  }, [onClose])
+  }, [onClose, triggerRef])
 
   const style: React.CSSProperties = {
     position: 'fixed',
@@ -381,6 +385,7 @@ function EditableTabItem({
         <TabDropdown
           anchorRect={dropdownAnchor}
           currentColor={tab.color}
+          triggerRef={menuBtnRef}
           onRename={() => { startRename() }}
           onColor={openColorPicker}
           onDelete={onDelete}
